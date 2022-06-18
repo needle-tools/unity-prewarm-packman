@@ -15,15 +15,22 @@ namespace Needle
 		}
 
 		[InitializeOnLoadMethod]
-		private static async void Init()
+		private static void Init()
 		{
 			if (PackManPreloaded) return;
 			PackManPreloaded = true;
-			await Task.Delay(5);
 			if (Resources.FindObjectsOfTypeAll<PackageManagerWindow>().FirstOrDefault() != null) return;
 			var window = EditorWindow.CreateWindow<PackageManagerWindow>();
-			await Task.Delay(5);
-			if (window) window.Close();
+
+			var frame = 0;
+			void OnEditorUpdate()
+			{
+				if (frame++ < 30) return;
+				if (window) window.Close();
+				EditorApplication.update -= OnEditorUpdate;
+			}
+
+			EditorApplication.update += OnEditorUpdate;
 		}
 	}
 }
