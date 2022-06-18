@@ -1,0 +1,8 @@
+{
+  "name": "com.needle.prewarm-packman",
+  "displayName": "Needle PrewarmPackman",
+  "version": "1.0.0-pre",
+  "description": "Opens packman once per editor start to fetch packages so PackMan will be ready when you actually open it!",
+  "type": "tool",
+  "unity": "2020.3"
+}
